@@ -28,7 +28,7 @@ int fib(int n)
 int main()
 {
     int x = 10;
-    cout << "Fibonacci at no " << x << " is : " << fibLoop(x);
+    cout << "Fibonacci (loop) at no " << x << " is : " << fibLoop(x);
     cout << "\nFibonacci at no " << x << " is : " << fib(x);
     return 0;
 }
