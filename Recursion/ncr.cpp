@@ -3,6 +3,26 @@
 #include <iostream>
 using namespace std;
 
+// Method 1
+int factNCR(int n)
+{
+    if (n == 0)
+    {
+        return 1;
+    }
+    return factNCR(n - 1) * n;
+}
+
+int nCR(int n, int r)
+{
+    int num, den;
+    num = factNCR(n);
+    den = factNCR(r) * factNCR(n - r);
+
+    return (num / den);
+}
+
+// Method 2
 int NCR(int n, int r)
 {
     if (r == 0 || n == r)
@@ -14,7 +34,8 @@ int NCR(int n, int r)
 
 int main()
 {
-    cout << "nCR : " << NCR(10, 4)<<" ways";
+    cout << "NCR : " << NCR(10, 4) << " ways";
+    cout << "\nnCr : " << nCR(10, 4) << " way";
 
     return 0;
 }
