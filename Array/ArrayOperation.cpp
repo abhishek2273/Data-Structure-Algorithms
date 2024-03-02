@@ -130,6 +130,63 @@ int RBinSearch(int a[], int l, int h, int key)
     return -1;
 }
 
+// Get method()
+int Get(struct Array arr, int index)
+{
+    if (index >= 0 && index < arr.length)
+        return arr.A[index];
+    return -1;
+}
+
+// Get method()
+int Set(struct Array *arr, int index, int x)
+{
+    if (index >= 0 && index < arr->length)
+    {
+        arr->A[index] = x;
+    }
+}
+
+// Max()
+int MAX(struct Array arr)
+{
+    int max = arr.A[0];
+    for (i = 1; i < arr.length; i++)
+    {
+        if (arr.A[i] > max)
+            max = arr.A[i];
+    }
+    return max;
+}
+
+// Min()
+int MIN(struct Array arr)
+{
+    int min = arr.A[0];
+    for (i = 1; i < arr.length; i++)
+    {
+        if (arr.A[i] < min)
+            min = arr.A[i];
+    }
+    return min;
+}
+
+// SUM()
+int SUM(struct Array arr)
+{
+    int sum = 0;
+    for (i = 0; i < arr.length; i++)
+        sum = sum + arr.A[i];
+
+    return sum;
+}
+
+// Average()
+float Average(struct Array arr)
+{
+    return (float)SUM(arr) / arr.length;
+}
+
 int main()
 {
     struct Array arr = {{2, 3, 4, 5, 6}, 20, 5};
@@ -139,8 +196,15 @@ int main()
     // Insert(&arr, 0, 100);
     // printf("%d\n", Delete(&arr, 2));
     // cout << "key :" << key << "\nindex :" << LinearSearch(&arr, key);
-    printf("index :%d", BinarySearchLoop(arr, 5));
-    printf("index :%d", RBinSearch(arr.A,0,arr.length, 5));
+    // printf("index :%d", BinarySearchLoop(arr, 5));
+    // printf("index :%d", RBinSearch(arr.A,0,arr.length, 5));
+
+    // printf("\n%d", Get(arr, 0));
+    // Set(&arr, 0, 25);
+    printf("\nMax :%d", MAX(arr));
+    printf("\nMin :%d", MIN(arr));
+    printf("\nSum :%d", SUM(arr));
+    printf("\nAvg :%.2f", Average(arr));
     Display(arr);
     return 0;
 }
