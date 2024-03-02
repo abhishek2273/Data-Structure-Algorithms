@@ -59,6 +59,15 @@ int Delete(struct Array *arr, int index)
     return -1;
 }
 
+// improve linear search
+void swap(int *x, int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
 // Linear Search
 int LinearSearch(struct Array *arr, int key)
 {
@@ -66,8 +75,8 @@ int LinearSearch(struct Array *arr, int key)
     {
         if (key == arr->A[i])
         {
-            swap(arr->A[i], arr->A[i - 1]);
-            return i - 1;
+            swap(&arr->A[i], &arr->A[i - 1]);
+            return i;
         }
     }
     return -1;
@@ -76,13 +85,12 @@ int LinearSearch(struct Array *arr, int key)
 int main()
 {
     struct Array arr = {{2, 3, 4, 5, 6}, 20, 5};
-    int key = 5;
+    int key = 6;
 
     // Append(&arr, 10);
     // Insert(&arr, 0, 100);
     // printf("%d\n", Delete(&arr, 2));
     cout << "key :" << key << "\nindex :" << LinearSearch(&arr, key);
     Display(arr);
-
     return 0;
 }
