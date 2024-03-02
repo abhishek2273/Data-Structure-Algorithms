@@ -187,6 +187,56 @@ float Average(struct Array arr)
     return (float)SUM(arr) / arr.length;
 }
 
+// Reverse an array()
+void Reverse(struct Array *arr)
+{
+    int temp;
+    for (i = 0, j = arr->length - 1; i < j; i++, j--)
+    {
+        temp = arr->A[i];
+        arr->A[i] = arr->A[j];
+        arr->A[j] = temp;
+    }
+}
+
+void Reverse2(struct Array *arr)
+{
+    int *B;
+    B = new int(arr->length * sizeof(int));
+
+    for (i = arr->length - 1, j = 0; i >= 0; i--, j++)
+    {
+        B[j] = arr->A[i];
+    }
+    for (i = 0; i < arr->length; i++)
+    {
+        arr->A[i] = B[i];
+    }
+}
+
+// Left Shifting/ Rotate();
+void LeftShifting(struct Array *arr)
+{
+    int firstElement = arr->A[0];
+    for (i = 0; i < arr->length - 1; i++)
+    {
+        arr->A[i] = arr->A[i + 1];
+    }
+    arr->A[arr->length - 1] = firstElement;
+}
+
+// Right Shifting/ Rotate();
+void RightShifting(struct Array *arr)
+{
+    int lastElement = arr->A[arr->length - 1];
+
+    for (i = arr->length - 1; i > 0; i--)
+    {
+        arr->A[i] = arr->A[i - 1];
+    }
+    arr->A[0] = lastElement;
+}
+
 int main()
 {
     struct Array arr = {{2, 3, 4, 5, 6}, 20, 5};
@@ -201,10 +251,16 @@ int main()
 
     // printf("\n%d", Get(arr, 0));
     // Set(&arr, 0, 25);
-    printf("\nMax :%d", MAX(arr));
-    printf("\nMin :%d", MIN(arr));
-    printf("\nSum :%d", SUM(arr));
-    printf("\nAvg :%.2f", Average(arr));
+    // printf("\nMax :%d", MAX(arr));
+    // printf("\nMin :%d", MIN(arr));
+    // printf("\nSum :%d", SUM(arr));
+    // printf("\nAvg :%.2f", Average(arr));
+    // printf("\nReverse :%d", Reverse(arr));
+    // Display(arr);
+    // Reverse(&arr);
+    // Reverse2(&arr);
+    // LeftShifting(&arr);
+    RightShifting(&arr);
     Display(arr);
     return 0;
 }
