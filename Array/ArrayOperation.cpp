@@ -66,7 +66,8 @@ int LinearSearch(struct Array *arr, int key)
     {
         if (key == arr->A[i])
         {
-            return i;
+            swap(arr->A[i], arr->A[i - 1]);
+            return i - 1;
         }
     }
     return -1;
@@ -82,5 +83,6 @@ int main()
     // printf("%d\n", Delete(&arr, 2));
     cout << "key :" << key << "\nindex :" << LinearSearch(&arr, key);
     Display(arr);
+
     return 0;
 }
