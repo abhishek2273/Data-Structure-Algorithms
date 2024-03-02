@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+int i, j, k;
 struct Array
 {
     int A[20];
@@ -11,7 +12,7 @@ struct Array
 void Display(struct Array arr)
 {
     int i;
-    printf("Elements are :\n");
+    printf("\nElements are :\n");
     for (i = 0; i < arr.length; i++)
     {
         cout << arr.A[i] << " ";
@@ -58,13 +59,28 @@ int Delete(struct Array *arr, int index)
     return -1;
 }
 
+// Linear Search
+int LinearSearch(struct Array *arr, int key)
+{
+    for (i = 0; i < arr->length; i++)
+    {
+        if (key == arr->A[i])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 int main()
 {
     struct Array arr = {{2, 3, 4, 5, 6}, 20, 5};
+    int key = 5;
 
     // Append(&arr, 10);
     // Insert(&arr, 0, 100);
-    printf("%d\n", Delete(&arr, 2));
+    // printf("%d\n", Delete(&arr, 2));
+    cout << "key :" << key << "\nindex :" << LinearSearch(&arr, key);
     Display(arr);
     return 0;
 }
