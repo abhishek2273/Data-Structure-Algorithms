@@ -9,6 +9,7 @@ struct Array
     int length;
 };
 
+// Display()
 void Display(struct Array arr)
 {
     int i;
@@ -19,6 +20,7 @@ void Display(struct Array arr)
     }
 }
 
+// Append()
 void Append(struct Array *arr, int x)
 {
     if (arr->length < arr->size)
@@ -27,6 +29,7 @@ void Append(struct Array *arr, int x)
     }
 }
 
+// Insert()
 void Insert(struct Array *arr, int index, int x)
 {
     int i;
@@ -42,6 +45,7 @@ void Insert(struct Array *arr, int index, int x)
     }
 }
 
+// Delete()
 int Delete(struct Array *arr, int index)
 {
     int i, x = 0;
@@ -237,9 +241,59 @@ void RightShifting(struct Array *arr)
     arr->A[0] = lastElement;
 }
 
+// check Array is Sort or not;
+int isArraySORT(struct Array arr)
+{
+    for (i = 0; i < arr.length - 1; i++)
+    {
+        if (arr.A[i + 1] < arr.A[i])
+        {
+            return 0;
+        }
+    }
+    return true;
+}
+
+// insert a Number in Sorted Array
+void insertNumberInSortedArray(struct Array *arr, int x)
+{
+    i = arr->length - 1;
+    if (arr->length == arr->size)
+    {
+        return;
+    }
+
+    while (i >= 0 && arr->A[i] > x)
+    {
+        arr->A[i + 1] = arr->A[i];
+        i--;
+    }
+    arr->A[i + 1] = x;
+    arr->length++;
+}
+
+// move negative integer in left side:
+void moveNegativeInLeftSide(struct Array *arr)
+{
+    i = 0;
+    j = arr->length - 1;
+    while (i < j)
+    {
+        while (arr->A[i] < 0)
+            i++;
+        while (arr->A[j] > 0)
+            j--;
+        if (i < j)
+        {
+            swap(arr->A[i], arr->A[j]);
+        }
+    }
+}
+
 int main()
 {
-    struct Array arr = {{2, 3, 4, 5, 6}, 20, 5};
+    struct Array arr = {{2, 3, 4, 15, 60}, 20, 5};
+    struct Array arr2 = {{-6, 3, -8, 10, 5, -7, -9, 12, -4, 2}, 20, 10};
     int key = 6;
 
     // Append(&arr, 10);
@@ -260,7 +314,13 @@ int main()
     // Reverse(&arr);
     // Reverse2(&arr);
     // LeftShifting(&arr);
-    RightShifting(&arr);
+    // RightShifting(&arr);
+
+    // cout << "\nResult :" << isArraySORT(arr);
+    insertNumberInSortedArray(&arr, 0);
     Display(arr);
+
+    // moveNegativeInLeftSide(&arr2);
+    // Display(arr2);
     return 0;
 }
