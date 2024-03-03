@@ -20,7 +20,6 @@ void Display(struct Array arr)
 }
 
 // Merge()
-
 struct Array *Merge(struct Array *arr1, struct Array *arr2)
 {
     i = j = k = 0;
@@ -35,18 +34,20 @@ struct Array *Merge(struct Array *arr1, struct Array *arr2)
     for (; i < arr1->length; i++)
         arr3->A[k++] = arr1->A[i];
 
-    for (; j < arr1->length; j++)
+    for (; j < arr2->length; j++)
         arr3->A[k++] = arr2->A[j];
 
     // set length arr3()
     arr3->length = arr1->length + arr2->length;
     arr3->size = 10;
+
+    return arr3;
 };
 
 int main()
 {
-    struct Array arr1 = {{2, 6, 10, 15, 25}, 20, 5};
-    struct Array arr2 = {{3, 5, 18, 20, 22}, 20, 5};
+    struct Array arr1 = {{2, 6, 10, 15, 25}, 5, 20};
+    struct Array arr2 = {{3, 5, 18, 20, 22}, 5, 20};
     struct Array *arr3;
 
     arr3 = Merge(&arr1, &arr2);
