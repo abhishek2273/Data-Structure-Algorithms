@@ -7,6 +7,7 @@ struct Array
     int size;
 };
 
+// In a sorted Array---
 void DuplicateElementUsingHashing(struct Array arr)
 {
     int max = arr.A[arr.size - 1];
