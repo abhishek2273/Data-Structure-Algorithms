@@ -5,16 +5,32 @@ int main()
 {
     char A[] = "Python";
     char B[7];
+    char t;
     int i, j;
-    for (i = 0; A[i] != '\0'; i++)
+
+    // //Method 1
+    // for (i = 0; A[i] != '\0'; i++)
+    // {
+    // }
+    // i = i - 1;
+    // for (j = 0; i >= 0; i--, j++)
+    // {
+    //     B[j] = A[i];
+    // }
+    // B[j] = '\0';
+    // cout << B;
+
+    // Method 2--------------------
+    for (j = 0; A[j] != '\0'; j++)
     {
     }
-    i = i - 1;
-    for (j = 0; i >= 0; i--, j++)
+    j = j - 1;
+    for (i = 0; i < j; i++, j--)
     {
-        B[j] = A[i];
+        t = A[i];
+        A[i] = A[j];
+        A[j] = t;
     }
-    B[j] = '\0';
-    cout << B;
+    cout << A;
     return 0;
 }
