@@ -78,15 +78,30 @@ void MissingElementInUnsortedArray(struct Array arr, int low, int high, int n)
     free(tempArr);
 };
 
+// Find Duplicate element a Array
+void duplicateElement(struct Array arr)
+{
+    int lastDuplicate = 0;
+    for (i = 0; i < arr.length; i++)
+    {
+        if (arr.A[i] == arr.A[i + 1] && arr.A[i] != lastDuplicate)
+        {
+            cout << arr.A[i] << " ";
+            lastDuplicate = arr.A[i];
+        }
+    }
+}
+
 int main()
 {
     struct Array arr = {{1, 2, 3, 4, 5, 6, 8, 9, 10}, 10, 10};
     struct Array arr1 = {{5, 8, 9, 10, 12, 13, 14, 15, 16, 17}, 20, 12};
     struct Array arrUnsorted = {{3, 7, 4, 9, 12, 11, 2, 10}, 20, 10};
+    struct Array Darr = {{1, 2, 3, 3, 5, 6, 6, 8, 9, 10}, 20, 10};
 
     // cout << "Missing Number is " << MissingElement(&arr);
     // MissingElementAnyOrder(&arr1, 6, 17, 12);
-    MissingElementInUnsortedArray(arrUnsorted, 1, 12, 10);
-
+    // MissingElementInUnsortedArray(arrUnsorted, 1, 12, 10);
+    duplicateElement(Darr);
     return 0;
 }
