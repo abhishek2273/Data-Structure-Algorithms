@@ -54,13 +54,39 @@ void MissingElementAnyOrder(struct Array *arr, int low, int high, int n)
     }
 }
 
+// Unsorted Array
+void MissingElementInUnsortedArray(struct Array arr, int low, int high, int n)
+{
+    // Requirement : known Low,high, no of element and sorted
+    int *tempArr = (int *)malloc(high * sizeof(int));
+
+    for (int i = 0; i < high; i++)
+        tempArr[i] = 0;
+
+    for (i = 0; i < n; i++)
+    {
+        tempArr[arr.A[i]]++;
+    }
+
+    cout << "Missing Elements: ";
+    for (int i = low; i <= high; i++)
+    {
+        if (tempArr[i] == 0)
+            cout << i << " ";
+    }
+    cout << endl;
+    free(tempArr);
+};
+
 int main()
 {
     struct Array arr = {{1, 2, 3, 4, 5, 6, 8, 9, 10}, 10, 10};
-    struct Array arr1 = {{6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17}, 20, 12};
+    struct Array arr1 = {{5, 8, 9, 10, 12, 13, 14, 15, 16, 17}, 20, 12};
+    struct Array arrUnsorted = {{3, 7, 4, 9, 12, 11, 2, 10}, 20, 10};
 
     // cout << "Missing Number is " << MissingElement(&arr);
-    MissingElementAnyOrder(&arr1, 6, 17, 12);
+    // MissingElementAnyOrder(&arr1, 6, 17, 12);
+    MissingElementInUnsortedArray(arrUnsorted, 1, 12, 10);
 
     return 0;
 }
