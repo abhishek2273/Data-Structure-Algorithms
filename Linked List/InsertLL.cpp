@@ -65,12 +65,51 @@ void Insert(int pos, int x)
     }
 }
 
+// Insert at last always
+void InsertLast(int x)
+{
+    struct Node *t, *last;
+    t = new Node();
+    t->data = x;
+    t->next = NULL;
+
+    if (first == NULL)
+        first = last = t;
+    else
+    {
+        last = first;
+        while (last->next != NULL)
+            last = last->next;
+
+        last->next = t;
+        last = t;
+    }
+}
+
+// Add Element in Sorted List
+void SortInsert(int x)
+{
+    struct Node *t, *p = first, *q = NULL;
+
+    while (p && p->data < x)
+    {
+        q = p;
+        p = p->next;
+    }
+    t = new Node();
+    t->data = x;
+    t->next = q->next;
+    q->next = t;
+}
+
 int main()
 {
-    int A[] = {2, 5, 6, 8, 9};
+    int A[] = {2, 5, 6, 8, 20};
 
     create(A, 5);
-    Insert(2, 100);
+    // Insert(2, 100);
+    // InsertLast(200);
+    SortInsert(7);
     Display(first);
     return 0;
 }
