@@ -102,14 +102,128 @@ void SortInsert(int x)
     q->next = t;
 }
 
+// count
+int Count(struct Node *p)
+{
+    int len = 0;
+    while (p != NULL)
+    {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+
+// Delete
+int DeleteNode(struct Node *p, int pos)
+{
+    struct Node *q;
+    int x = -1;
+
+    if (pos < 1 || pos > Count(p))
+        return x;
+
+    if (pos == 1)
+    {
+        q = first;
+        first = first->next;
+        x = q->data;
+        free(q);
+        return x;
+    }
+
+    else if (pos > 0)
+    {
+        for (int i = 0; i < pos - 1 && p; i++)
+        {
+            q = p;
+            p = p->next;
+        }
+        if (p)
+        {
+            q->next = p->next;
+            x = p->data;
+            free(p);
+            return x;
+        }
+    }
+}
+
+// isSorted
+int isSorted(struct Node *p)
+{
+    int x = INT16_MIN;
+    p = first;
+    while (p != NULL)
+    {
+        if (p->data < x)
+            return false;
+        x = p->data;
+        p = p->next;
+    }
+    return true;
+}
+
+// Remove Duplicate
+void RemoveDuplicate(struct Node *p)
+{
+    struct Node *q = p->next;
+    while (q != NULL)
+    {
+        if (q->data != p->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            delete q;
+            q = p->next;
+        }
+    }
+}
+
+// Reverse a Linked List
+void Reverse1(struct Node *p)
+{
+    int *A, i = 0;
+    struct Node *q = p;
+
+    A = new int[sizeof(int) * Count(p)];
+
+    while (q != NULL)
+    {
+        A[i] = q->data;
+        q = q->next;
+        i++;
+    }
+
+    q = p;
+    i--;
+    while (q != NULL)
+    {
+        q->data = A[i];
+        q = q->next;
+        i--;
+    }
+}
+
 int main()
 {
     int A[] = {2, 5, 6, 8, 20};
+    // int A[] = {2, 2, 3, 8, 8, 8};
+    int size = sizeof(A) / sizeof(int);
 
-    create(A, 5);
+    create(A, size);
     // Insert(2, 100);
     // InsertLast(200);
-    SortInsert(7);
+    // SortInsert(7);
+    // printf("delete element is %d\n", DeleteNode(first, 30));
+    // printf("%d\n", isSorted(first));
+    // RemoveDuplicate(first);
+
+    Reverse1(first);
     Display(first);
     return 0;
 }
