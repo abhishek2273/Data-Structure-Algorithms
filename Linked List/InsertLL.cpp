@@ -5,7 +5,7 @@ struct Node
 {
     int data;
     struct Node *next;
-} *first = NULL;
+} *first = NULL, *second = NULL, *third = NULL;
 
 // Create
 void create(int A[], int n)
@@ -16,6 +16,25 @@ void create(int A[], int n)
     first->data = A[0];
     first->next = NULL;
     last = first;
+
+    for (i = 1; i < n; i++)
+    {
+        t = new Node();
+        t->data = A[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+
+void create2(int A[], int n)
+{
+    struct Node *t, *last;
+    int i;
+    second = new Node();
+    second->data = A[0];
+    second->next = NULL;
+    last = second;
 
     for (i = 1; i < n; i++)
     {
@@ -209,13 +228,91 @@ void Reverse1(struct Node *p)
     }
 }
 
+void Reverse2(struct Node *p)
+{
+    struct Node *q = NULL, *r = NULL;
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
+void Reverse3(struct Node *p, struct Node *q)
+{
+    if (p)
+    {
+        Reverse3(p, p->next);
+        p->next = q;
+    }
+    else
+    {
+        first = q;
+    }
+}
+
+// Concate two linked List
+void Concate(struct Node *p, struct Node *q)
+{
+    third = p;
+    while (p->next != NULL)
+        p = p->next;
+    p->next = q;
+    q = NULL;
+}
+
+// Merge two linked list
+void MergeLL(struct Node *p, struct Node *q)
+{
+    struct Node *last = NULL;
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        last->next = NULL;
+    }
+    else
+    {
+        third = last = q;
+        q = q->next;
+        last->next = NULL;
+    }
+
+    while (p != NULL && q != NULL)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p != NULL)
+        last->next = p;
+    else
+        last->next = q;
+}
 int main()
 {
     int A[] = {2, 5, 6, 8, 20};
+    int B[] = {3, 4, 7, 12, 21};
     // int A[] = {2, 2, 3, 8, 8, 8};
     int size = sizeof(A) / sizeof(int);
+    int size2 = sizeof(B) / sizeof(int);
 
     create(A, size);
+    create2(B, size2);
     // Insert(2, 100);
     // InsertLast(200);
     // SortInsert(7);
@@ -223,7 +320,11 @@ int main()
     // printf("%d\n", isSorted(first));
     // RemoveDuplicate(first);
 
-    Reverse1(first);
+    // Reverse2(first);
+    // Reverse3(NULL, first);
+
+    // Concate(first, second);
+    MergeLL(first, second);
     Display(first);
     return 0;
 }
