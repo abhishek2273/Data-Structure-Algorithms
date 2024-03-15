@@ -303,6 +303,9 @@ void MergeLL(struct Node *p, struct Node *q)
     else
         last->next = q;
 }
+
+// Check LL is in a LOOP or not
+
 int main()
 {
     int A[] = {2, 5, 6, 8, 20};
@@ -312,7 +315,7 @@ int main()
     int size2 = sizeof(B) / sizeof(int);
 
     create(A, size);
-    create2(B, size2);
+    // create2(B, size2);
     // Insert(2, 100);
     // InsertLast(200);
     // SortInsert(7);
@@ -324,7 +327,7 @@ int main()
     // Reverse3(NULL, first);
 
     // Concate(first, second);
-    MergeLL(first, second);
+    // MergeLL(first, second);
     Display(first);
     return 0;
 }
