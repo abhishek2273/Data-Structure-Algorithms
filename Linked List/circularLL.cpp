@@ -25,7 +25,7 @@ void create(int A[], int n)
         last = t;
     }
 }
-
+// Display
 void RDisplay(struct Node *p)
 {
     static int flag = 0;
@@ -48,12 +48,69 @@ void Display(struct Node *p)
     cout << endl;
 }
 
+// Finding lenght of Circular Linked list
+int length(struct Node *l)
+{
+    int count = 0;
+    do
+    {
+        count++;
+        l = l->next;
+    } while (l != head);
+
+    return count;
+}
+
+// Insert
+void Insert(struct Node *p, int pos, int x)
+{
+    struct Node *t;
+    int i;
+    if (pos < 0 || pos > length(p))
+    {
+        return;
+    }
+
+    if (pos == 1)
+    {
+        t = new Node();
+        t->data = x;
+
+        if (head == NULL)
+        {
+            head = t;
+            head->next = head;
+        }
+        else
+        {
+            while (p->next != head)
+                p = p->next;
+            p->next = t;
+            t->next = head;
+            head = t;
+        }
+    }
+
+    else
+    {
+        for (i = 1; i < pos - 1; i++)
+            p = p->next;
+        t = new Node();
+        t->data = x;
+        t->next = p->next;
+        p->next = t;
+    }
+}
+
 int main()
 {
     int A[] = {2, 3, 4, 5, 6};
     int size = sizeof(A) / sizeof(int);
 
     create(A, size);
+    // cout << "length is " << length(head);
+
+    Insert(head, 4, 100);
     RDisplay(head);
     return 0;
 }
