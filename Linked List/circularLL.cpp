@@ -102,6 +102,46 @@ void Insert(struct Node *p, int pos, int x)
     }
 }
 
+// Delete function
+int Delete(struct Node *p, int pos)
+{
+    struct Node *q;
+    int x, i;
+    if (pos < 0 || pos > length(p))
+        return -1;
+
+    if (pos == 1)
+    {
+        while (p->next != head)
+            p = p->next;
+        x = head->data;
+
+        if (p == head)
+        {
+            delete head;
+            head = NULL;
+        }
+        else
+        {
+            p->next = head->next;
+            delete head;
+            head = p->next;
+        }
+    }
+
+    else
+    {
+        for (i = 0; i < pos - 2; i++)
+            p = p->next;
+        q = p->next;
+        p->next = q->next;
+        x = q->data;
+        delete q;
+    }
+
+    return x;
+}
+
 int main()
 {
     int A[] = {2, 3, 4, 5, 6};
@@ -110,7 +150,8 @@ int main()
     create(A, size);
     // cout << "length is " << length(head);
 
-    Insert(head, 4, 100);
+    // Insert(head, 4, 100);
+    cout << "Del " << Delete(head, 2) << endl;
     RDisplay(head);
     return 0;
 }
