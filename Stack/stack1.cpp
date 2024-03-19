@@ -90,6 +90,7 @@ int isFull(struct Stack st)
     else
         return 0;
 }
+
 int main()
 {
     struct Stack st;
@@ -100,7 +101,7 @@ int main()
     push(&st, 589);
 
     printf("pop : %d\n", pop(&st));
-    printf("peek : %d\n", peek(st,2));
+    printf("peek : %d\n", peek(st, 2));
 
     Display(st);
 
