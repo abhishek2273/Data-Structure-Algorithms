@@ -68,6 +68,6 @@ int main()
 {
     char *exp = "((a+b)*(c-d)))";
     // char *exp1 = "{([a+b)*[c-d])/e}";
-    printf("%d ", isBalanced2(exp1));
+    printf("%d ", isBalanced(exp));
     return 0;
 }
