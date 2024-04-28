@@ -138,3 +138,19 @@ int main()
     Postorder(root);
     return 0;
 }
+
+/*
+OUTPUT:
+Enter root value 10
+eneter left child of 10 20
+eneter right child of 10 30
+eneter left child of 20 -1
+eneter right child of 20 -1
+eneter left child of 30 -1
+eneter right child of 30 -1
+10 20 30 
+Post Order 20 30 10       
+Inorder 20 10 30 
+Postorder 20 30 10      
+
+*/
