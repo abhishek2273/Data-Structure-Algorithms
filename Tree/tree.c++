@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
-#include <iostream>
 using namespace std;
+
+#include "Queue.h"
 
 struct TreeNode
 {
@@ -8,54 +9,6 @@ struct TreeNode
     int data;
     struct TreeNode *rchild;
 } *root = NULL;
-
-struct Queue
-{
-    int size;
-    int front;
-    int Rear;
-    TreeNode **A;
-};
-
-void create(struct Queue *Q, int size)
-{
-    Q->size = size;
-    Q->front = Q->Rear = -1;
-    Q->A = new TreeNode *[Q->size];
-}
-
-// Insertion()
-void enqueue(struct Queue *q, TreeNode *x)
-{
-    if (q->Rear == q->size - 1)
-        cout << "queue is full\n";
-    else
-    {
-        q->Rear++;
-        q->A[q->Rear] = x;
-    }
-}
-
-// Deletion()
-TreeNode *dequeue(struct Queue *q)
-{
-    TreeNode *x = NULL;
-
-    if (q->front == q->Rear)
-        cout << "queue is empty\n";
-    else
-    {
-        q->front++;
-        x = q->A[q->front];
-    }
-    return x;
-}
-
-// isEmpty()
-int isEmpty(struct Queue q)
-{
-    return q.front == q.Rear;
-}
 
 // Creating a Tree using Queue
 void Treecreate()
@@ -98,6 +51,7 @@ void Treecreate()
     }
 }
 
+// Recursive function of PRE-POST-Order
 void Preorder(struct TreeNode *p)
 {
     if (p)
@@ -129,18 +83,18 @@ void Postorder(struct TreeNode *p)
 int main()
 {
     Treecreate();
+    printf("\nPre Order ");
     Preorder(root);
     printf("\nPost Order ");
     Postorder(root);
     cout << "\nInorder ";
     Inorder(root);
-    cout << "\nPostorder ";
-    Postorder(root);
+
     return 0;
 }
 
 /*
-OUTPUT:
+OUTPUT: Using Queue.h (Recursive traversal)
 Enter root value 10
 eneter left child of 10 20
 eneter right child of 10 30
@@ -148,9 +102,9 @@ eneter left child of 20 -1
 eneter right child of 20 -1
 eneter left child of 30 -1
 eneter right child of 30 -1
-10 20 30
-Post Order 20 30 10
-Inorder 20 10 30
-Postorder 20 30 10
+
+Pre Order 10 20 30        
+Post Order 20 30 10       
+Inorder 20 10 30 
 
 */
