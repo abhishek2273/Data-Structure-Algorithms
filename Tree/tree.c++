@@ -2,6 +2,7 @@
 using namespace std;
 
 #include "Queue.h"
+#include "Stack.h"
 
 struct TreeNode
 {
@@ -80,15 +81,98 @@ void Postorder(struct TreeNode *p)
     }
 }
 
+// Iterative Traversals for In-Pre-Post order traversals----------
+
+void I_Preorder(struct TreeNode *p)
+{
+    struct Stack stk;
+    StackCreate(&stk, 100);
+
+    while (p || !isEmptyStack(stk))
+    {
+        if (p)
+        {
+            printf("%d ", p->data);
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else
+        {
+            p = pop(&stk);
+            p = p->rchild;
+        }
+    }
+}
+
+void I_Inorder(struct TreeNode *p)
+{
+    struct Stack stk;
+    StackCreate(&stk, 100);
+
+    while (p || !isEmptyStack(stk))
+    {
+        if (p)
+        {
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else
+        {
+            p = pop(&stk);
+            printf("%d ", p->data);
+            p = p->rchild;
+        }
+    }
+}
+
+void I_Postorder(struct TreeNode *p)
+{
+    struct Stack stk;
+    StackCreate(&stk, 100);
+    TreeNode *lastVisited = NULL;
+
+    while (p || !isEmptyStack(stk))
+    {
+        if (p)
+        {
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else
+        {
+            TreeNode *peekNode = stackTop(stk);
+            if (peekNode->rchild != NULL && lastVisited != peekNode->rchild)
+            {
+                p = peekNode->rchild;
+            }
+            else
+            {
+                printf("%d ", peekNode->data);
+                lastVisited = pop(&stk);
+                p = NULL;
+            }
+        }
+    }
+}
+
 int main()
 {
     Treecreate();
-    printf("\nPre Order ");
-    Preorder(root);
-    printf("\nPost Order ");
-    Postorder(root);
-    cout << "\nInorder ";
-    Inorder(root);
+    // Recursive call
+    // printf("\nPre Order ");
+    // Preorder(root);
+    // printf("\nPost Order ");
+    // Postorder(root);
+    // cout << "\nInorder ";
+    // Inorder(root);
+
+    // Iterative call
+    printf("\nI_Pre Order ");
+    I_Preorder(root);
+    printf("\nI_Post Order ");
+    I_Postorder(root);
+    cout << "\nI_Inorder ";
+    I_Inorder(root);
 
     return 0;
 }
@@ -103,8 +187,8 @@ eneter right child of 20 -1
 eneter left child of 30 -1
 eneter right child of 30 -1
 
-Pre Order 10 20 30        
-Post Order 20 30 10       
-Inorder 20 10 30 
+Pre Order 10 20 30
+Post Order 20 30 10
+Inorder 20 10 30
 
 */
